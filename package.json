@@ -1,10 +1,10 @@
 {
-  "name": "mpcomponents",
+  "name": "mgg-components",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "APPLICATION=data NODE_ENV=test node build/index.js -d"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/jsmgg/mpcomponents/issues"
   },
-  "homepage": "https://github.com/jsmgg/mpcomponents#readme"
+  "homepage": "https://github.com/jsmgg/mpcomponents#readme",
+  "devDependencies": {
+    "commander": "^4.0.1",
+    "gulp": "^4.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-typescript": "^5.0.1",
+    "typescript": "^3.7.2"
+  }
 }
