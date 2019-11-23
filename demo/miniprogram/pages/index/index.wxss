@@ -21,8 +21,5 @@
 }
 
 .test{
-	color:red;
-	.btn{
-		background:red;
-	}
+	color:#000;
 }

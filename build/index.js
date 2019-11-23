@@ -1,38 +1,49 @@
 const gulp=require("gulp");
 const program = require('commander');
+const moment = require('moment');
 
 const wxssTask = require('./tasks/wxss');
 const tsTask = require('./tasks/ts');
+const jsonTask = require('./tasks/json');
+const wxmlTask = require('./tasks/wxml');
+
+const dateFormat = 'YYYY-MM-DDDD HH:mm:SS';
 
 
-//var fs = require("fs")
 
-// program
-//     .version('0.0.1')
-//     .option('-d, --debug [debug]', 'Debug build')
-//     .parse(process.argv);
+program
+    .version('0.0.1')
+    .option('-w, --watch', 'watch')
+    .parse(process.argv);
 
 // console.log(process.env.APPLICATION);
 // console.log(process.env.NODE_ENV);
 // console.log(program.debug);
 
 
-// fs.readFile('./demo/miniprogram/pages/index/index.wxss', function (err, data) {
-//    if (err) {
-//        return console.error(err);
-//    }
-//    console.log("异步读取: " + data.toString());
-// });
+function build(){
+	const tasks = [wxssTask,tsTask,jsonTask,wxmlTask];
+	console.log(`${moment().format(dateFormat)}开始构建...`);
+	tasks.forEach(task=>{
+		task();
+	});	
+	console.log(`${moment().format(dateFormat)}构建结束...`);
+}
 
+build();
+if(program.watch){
 
+	gulp.watch('./demo/miniprogram/**/*.*', build);
+
+}
 
 
 
 //gulp.watch("./demo/miniprogram/pages/index/index.wxss",gulp.series('sass'));
-wxssTask();
-tsTask();
+//gulp.parallel([wxssTask,tsTask,jsonTask,wxmlTask])
+//wxssTask();
+//tsTask();
 
-gulp.src(['./demo/miniprogram/**/*.json','./demo/miniprogram/**/*.wxml']).pipe(gulp.dest('./dist'));
 
 
 
